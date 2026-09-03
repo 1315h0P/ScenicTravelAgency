@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Scenic Travel Agency (STA) – Your Journey, Our Commitment</title>
+
+    <!-- Font Awesome (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a4b6e;
+            --primary-light: #1a6a94;
+            --primary-dark: #06344e;
+            --secondary: #c9a84c;
+            --secondary-light: #e0c76e;
+            --accent: #f5f0e8;
+            --gray-100: #f8f7f4;
+            --gray-200: #eae8e3;
+            --gray-300: #d0cdc6;
+            --gray-600: #6b6a66;
+            --gray-800: #2e2d2a;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(10, 75, 110, 0.10);
+            --shadow-hover: 0 16px 48px rgba(10, 75, 110, 0.18);
+            --radius: 12px;
+            --transition: 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: var(--gray-600);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--gray-800);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 0 100px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(201, 168, 76, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--secondary);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .hero-badges span {
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-image {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .hero-image .card-icon {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .hero-image .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        /* ===== ABOUT / OVERVIEW ===== */
+        .about {
+            padding: 80px 0;
+            background: var(--gray-100);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .about-stats .stat {
+            background: var(--white);
+            padding: 20px 16px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .about-stats .stat .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .about-stats .stat .label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .about-image {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .about-image i {
+            font-size: 5rem;
+            color: var(--primary-light);
+            margin-bottom: 16px;
+        }
+
+        .about-image h4 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+        }
+
+        /* ===== MESSAGE ===== */
+        .message {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .message-card {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 48px 56px;
+            border-left: 6px solid var(--secondary);
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .message-card .quote-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            opacity: 0.4;
+            margin-bottom: 8px;
+        }
+
+        .message-card p {
+            font-size: 1.05rem;
+            color: var(--gray-800);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .message-card .author {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        .message-card .author span {
+            font-weight: 400;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* ===== VISION / MISSION / VALUES ===== */
+        .vision-mission {
+            padding: 80px 0;
+            background: var(--gray-100);
+        }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .vm-card {
+            background: var(--white);
+            padding: 36px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .vm-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .vm-card .icon {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .vm-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .vm-card p {
+            color: var(--gray-600);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .value-item {
+            background: var(--white);
+            padding: 28px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .value-item:hover {
+            border-bottom-color: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .value-item i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .value-item h4 {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .value-item p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            background: var(--white);
+        }
+
+        .service-card .icon {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .service-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-card ul li {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-card ul li i {
+            font-size: 0.6rem;
+            color: var(--secondary);
+        }
+
+        /* ===== COMPETITIVE ADVANTAGE ===== */
+        .advantage {
+            padding: 80px 0;
+            background: var(--primary-dark);
+            color: var(--white);
+        }
+
+        .advantage .section-title h2 {
+            color: var(--white);
+        }
+        .advantage .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .advantage .section-title .tag {
+            background: rgba(201, 168, 76, 0.2);
+            color: var(--secondary);
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .advantage-item {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .advantage-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .advantage-item i {
+            font-size: 2.4rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .advantage-item h4 {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+
+        .advantage-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ===== INDUSTRIES ===== */
+        .industries {
+            padding: 80px 0;
+            background: var(--gray-100);
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .industry-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .industry-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .industry-item i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        /* ===== ORGANIZATIONAL STRUCTURE ===== */
+        .org-structure {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .org-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .org-node {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 20px 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .org-node h4 {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .org-node p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        .org-node.ceo {
+            border-left-color: var(--primary);
+            background: var(--primary-dark);
+            color: var(--white);
+            max-width: 320px;
+        }
+        .org-node.ceo h4 {
+            color: var(--white);
+        }
+        .org-node.ceo p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .org-children {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .org-children .org-node {
+            max-width: 100%;
+        }
+
+        /* ===== QUALITY / SAFETY / CSR ===== */
+        .quality-section {
+            padding: 80px 0;
+            background: var(--gray-100);
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .quality-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .quality-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quality-card i {
+            font-size: 2.4rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .quality-card h4 {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .quality-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .quality-card ul li {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quality-card ul li i {
+            font-size: 0.6rem;
+            color: var(--secondary);
+        }
+
+        /* ===== STRATEGIC OBJECTIVES ===== */
+        .objectives {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--gray-100);
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .objective-item:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+
+        .objective-item .num {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            min-width: 32px;
+        }
+
+        .objective-item p {
+            font-weight: 500;
+            color: var(--gray-800);
+        }
+
+        /* ===== CONTACT / FOOTER ===== */
+        .contact-footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 60px 0 32px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 48px;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-info p {
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-details .item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .contact-details .item i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            width: 24px;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.14);
+            border-color: var(--secondary);
+        }
+
+        .contact-form .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 14px;
+        }
+
+        .contact-form .btn {
+            background: var(--secondary);
+            color: var(--white);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact-form .btn:hover {
+            background: var(--secondary-light);
+        }
+
+        .contact-form .form-success {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid #2ecc71;
+            border-radius: 8px;
+            color: #2ecc71;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .contact-form .form-success.show {
+            display: block;
+        }
+
+        .contact-form .form-error {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            color: #e74c3c;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .contact-form .form-error.show {
+            display: block;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .footer-bottom .socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-bottom .socials a {
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .footer-bottom .socials a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-badges {
+                justify-content: center;
+            }
+
+            .hero-image {
+                align-items: center;
+            }
+
+            .hero-image .logo-wrapper {
+                justify-content: center;
+            }
+
+            .hero-image .card-icon {
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .advantage-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .industries-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .quality-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .org-children {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 76px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 32px 24px;
+                gap: 20px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+                transform: translateY(-120%);
+                transition: var(--transition);
+                border-bottom: 1px solid var(--gray-200);
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .industries-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vm-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .message-card {
+                padding: 32px 24px;
+            }
+
+            .contact-form .row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .industries-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+            .logo i {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to top */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: var(--white);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .back-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-top:hover {
+            background: var(--secondary-light);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-compass"></i>
+                Scenic<span>Travel</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#advantage">Advantage</a></li>
+                <li><a href="#industries">Industries</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <!-- Left Column -->
+            <div class="hero-content">
+                <h1>Your Journey, <br/><span class="highlight">Our Commitment</span></h1>
+                <p>
+                    Scenic Travel Agency (STA) – proudly Papua New Guinean-owned,
+                    delivering professional, reliable, and innovative travel solutions
+                    for corporate, government, and individual travellers.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px;">
+                    <a href="#services" class="btn btn-primary">
+                        <i class="fas fa-plane"></i> Explore Services
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                </div>
+                <div class="hero-badges">
+                    <span><i class="fas fa-check-circle" style="color:var(--secondary);"></i> 100% PNG Owned</span>
+                    <span><i class="fas fa-clock"></i> 24/7 Support</span>
+                    <span><i class="fas fa-star"></i> Service Excellence</span>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="hero-image">
+                <div class="logo-wrapper">
+                    <img src="Logo.jpg" alt="Scenic Travel Agency Logo" style="height: 300px; width: auto; object-fit: contain; display: block; margin-left: 130px; mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);">
+                </div>
+                <div class="card-icon">
+                    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:0.9rem; justify-content:center;">
+                        <span style="opacity:0.85; white-space:nowrap;">
+                            <i class="fas fa-map-pin" style="color:var(--secondary); margin-right:6px;"></i>
+                            Papua New Guinea · Leading travel management
+                        </span>
+                        <span style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <span style="background:rgba(201,168,76,0.15); padding:3px 14px; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(201,168,76,0.2); color:#fff;">Corporate</span>
+                            <span style="background:rgba(201,168,76,0.15); padding:3px 14px; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(201,168,76,0.2); color:#fff;">Government</span>
+                            <span style="background:rgba(201,168,76,0.15); padding:3px 14px; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(201,168,76,0.2); color:#fff;">Leisure</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT / OVERVIEW ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">About STA</span>
+                <h2>Company Overview</h2>
+                <p>Scenic Travel Agency (STA) is a proudly Papua New Guinean-owned travel management company headquartered in Port Moresby.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <h3>Professional &amp; Reliable Travel Solutions</h3>
+                    <p>Established to provide professional, reliable, and innovative travel solutions, STA serves corporate organizations, government agencies, development partners, non-government organizations, and individual travellers throughout Papua New Guinea and beyond.</p>
+                    <p>With a strong commitment to service excellence, STA delivers comprehensive travel management solutions tailored to the unique needs of its clients. Through strategic partnerships with airlines, hotels, transport providers, and tourism operators, the company ensures seamless travel experiences while maintaining competitive pricing and high service standards.</p>
+                    <div class="about-stats">
+                        <div class="stat"><div class="number">100%</div><div class="label">PNG Owned</div></div>
+                        <div class="stat"><div class="number">24/7</div><div class="label">Support</div></div>
+                        <div class="stat"><div class="number">+10</div><div class="label">Industry Partners</div></div>
+                    </div>
+                </div>
+                <div class="about-image fade-up">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Your Journey, Our Commitment</h4>
+                    <p style="color:var(--gray-600); font-size:0.95rem; margin-top:8px;">STA's extensive understanding of both domestic and international travel markets enables efficient travel planning, logistical support, and destination management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHAIRMAN'S MESSAGE ===== -->
+    <section class="message">
+        <div class="container">
+            <div class="message-card fade-up">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>Welcome to Scenic Travel Agency (STA). At STA, we believe travel is more than moving people from one destination to another—it is about creating opportunities, building relationships, facilitating business growth, and delivering memorable experiences. As a locally owned Papua New Guinean company, we understand the unique challenges and opportunities within our country and region. Our team is dedicated to providing professional travel solutions that meet the evolving needs of government agencies, corporate organizations, development partners, and individual travellers.</p>
+                <p>Our success is built on trust, integrity, professionalism, and a commitment to delivering exceptional customer service. We continue to invest in our people, technology, and partnerships to ensure we remain a preferred travel management provider in Papua New Guinea.</p>
+                <div class="author">Managing Director <span>• Scenic Travel Agency (STA)</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VISION / MISSION / VALUES ===== -->
+    <section class="vision-mission">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Our Core</span>
+                <h2>Vision, Mission &amp; Values</h2>
+                <p>Guiding principles that drive every decision we make.</p>
+            </div>
+            <div class="vm-grid">
+                <div class="vm-card fade-up">
+                    <div class="icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To be Papua New Guinea's leading travel management company, recognized for service excellence, innovation, reliability, and customer satisfaction.</p>
+                </div>
+                <div class="vm-card fade-up">
+                    <div class="icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To deliver efficient, cost-effective, and customized travel solutions that exceed client expectations while promoting responsible tourism and contributing to Papua New Guinea's economic development.</p>
+                </div>
+            </div>
+            <div class="values-grid">
+                <div class="value-item fade-up"><i class="fas fa-shield-alt"></i><h4>Integrity</h4><p>We conduct our business with honesty, transparency, and professionalism.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-star"></i><h4>Excellence</h4><p>We strive to exceed expectations through quality service and continuous improvement.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-users"></i><h4>Customer Focus</h4><p>Our clients are at the center of every decision we make.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-clock"></i><h4>Reliability</h4><p>We deliver dependable services and maintain the highest standards of accountability.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-rocket"></i><h4>Innovation</h4><p>We embrace technology and industry best practices to improve customer experiences.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-handshake"></i><h4>Partnership</h4><p>We build strong relationships with clients, suppliers, and stakeholders for mutual success.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">What We Offer</span>
+                <h2>Our Services</h2>
+                <p>Comprehensive travel solutions tailored to every need.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-briefcase"></i></div><h4>Corporate Travel Management</h4><ul><li><i class="fas fa-chevron-right"></i> Domestic &amp; international air bookings</li><li><i class="fas fa-chevron-right"></i> Executive &amp; VIP travel arrangements</li><li><i class="fas fa-chevron-right"></i> Travel policy compliance management</li><li><i class="fas fa-chevron-right"></i> Corporate account management</li><li><i class="fas fa-chevron-right"></i> Travel reporting &amp; cost analysis</li><li><i class="fas fa-chevron-right"></i> Group travel coordination</li></ul></div>
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-landmark"></i></div><h4>Government &amp; Institutional Travel</h4><ul><li><i class="fas fa-chevron-right"></i> Official travel arrangements</li><li><i class="fas fa-chevron-right"></i> Conference &amp; workshop travel</li><li><i class="fas fa-chevron-right"></i> Delegation travel coordination</li><li><i class="fas fa-chevron-right"></i> Travel logistics support</li><li><i class="fas fa-chevron-right"></i> Procurement-compliant travel services</li></ul></div>
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-umbrella-beach"></i></div><h4>Leisure &amp; Holiday Travel</h4><ul><li><i class="fas fa-chevron-right"></i> Customized holiday packages</li><li><i class="fas fa-chevron-right"></i> Family vacations</li><li><i class="fas fa-chevron-right"></i> Honeymoon packages</li><li><i class="fas fa-chevron-right"></i> Cruise &amp; resort bookings</li><li><i class="fas fa-chevron-right"></i> International travel packages</li></ul></div>
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-hotel"></i></div><h4>Accommodation Management</h4><ul><li><i class="fas fa-chevron-right"></i> Hotel reservations</li><li><i class="fas fa-chevron-right"></i> Long-term accommodation arrangements</li><li><i class="fas fa-chevron-right"></i> Serviced apartments</li><li><i class="fas fa-chevron-right"></i> Resort &amp; retreat bookings</li></ul></div>
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-car"></i></div><h4>Transport Solutions</h4><ul><li><i class="fas fa-chevron-right"></i> Airport transfers</li><li><i class="fas fa-chevron-right"></i> Vehicle hire services</li><li><i class="fas fa-chevron-right"></i> Chauffeur services</li><li><i class="fas fa-chevron-right"></i> Group transportation solutions</li></ul></div>
+                <div class="service-card fade-up"><div class="icon"><i class="fas fa-headset"></i></div><h4>Travel Support Services</h4><ul><li><i class="fas fa-chevron-right"></i> Travel insurance arrangements</li><li><i class="fas fa-chevron-right"></i> Visa assistance &amp; advisory</li><li><i class="fas fa-chevron-right"></i> Travel documentation support</li><li><i class="fas fa-chevron-right"></i> Emergency travel assistance</li><li><i class="fas fa-chevron-right"></i> Meet-&amp;-greet services</li></ul></div>
+            </div>
+            <div style="margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+                <div class="service-card fade-up" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width:100%;">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h4>Tourism &amp; Destination Management</h4>
+                    <ul style="display:grid; grid-template-columns:1fr 1fr; gap:4px 24px;">
+                        <li><i class="fas fa-chevron-right"></i> Cultural tours</li>
+                        <li><i class="fas fa-chevron-right"></i> Eco-tourism packages</li>
+                        <li><i class="fas fa-chevron-right"></i> Adventure travel experiences</li>
+                        <li><i class="fas fa-chevron-right"></i> Corporate retreats</li>
+                        <li><i class="fas fa-chevron-right" style="grid-column:1/2;"></i> Incentive travel programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMPETITIVE ADVANTAGE ===== -->
+    <section class="advantage" id="advantage">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Why STA</span>
+                <h2>Our Competitive Advantage</h2>
+                <p>What sets Scenic Travel Agency apart.</p>
+            </div>
+            <div class="advantage-grid">
+                <div class="advantage-item fade-up"><i class="fas fa-map-marked-alt"></i><h4>Local Expertise</h4><p>Strong understanding of Papua New Guinea's travel environment and logistics requirements.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-user-tie"></i><h4>Personalized Service</h4><p>Dedicated travel consultants who provide customized travel solutions.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-handshake"></i><h4>Strong Industry Partnerships</h4><p>Established relationships with airlines, hotels, transport providers, and tourism operators.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-coins"></i><h4>Cost-Effective Solutions</h4><p>Competitive pricing and optimized travel planning.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-users-cog"></i><h4>Professional Team</h4><p>Experienced staff with extensive knowledge of travel management and customer service.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-bolt"></i><h4>Rapid Response Capability</h4><p>Efficient handling of urgent travel requests and itinerary changes.</p></div>
+                <div class="advantage-item fade-up" style="grid-column: 1 / -1; max-width: 400px; margin: 0 auto; width:100%;"><i class="fas fa-phone-alt"></i><h4>24/7 Travel Support</h4><p>Emergency assistance and traveller support services around the clock.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INDUSTRIES ===== -->
+    <section class="industries" id="industries">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Who We Serve</span>
+                <h2>Industries We Serve</h2>
+                <p>STA proudly supports clients across a wide range of sectors.</p>
+            </div>
+            <div class="industries-grid">
+                <div class="industry-item fade-up"><i class="fas fa-flag"></i> National Government Agencies</div>
+                <div class="industry-item fade-up"><i class="fas fa-building"></i> Provincial Governments</div>
+                <div class="industry-item fade-up"><i class="fas fa-industry"></i> State-Owned Enterprises</div>
+                <div class="industry-item fade-up"><i class="fas fa-hard-hat"></i> Mining &amp; Resources</div>
+                <div class="industry-item fade-up"><i class="fas fa-oil-can"></i> Oil &amp; Gas</div>
+                <div class="industry-item fade-up"><i class="fas fa-university"></i> Banking &amp; Finance</div>
+                <div class="industry-item fade-up"><i class="fas fa-wifi"></i> Telecommunications</div>
+                <div class="industry-item fade-up"><i class="fas fa-hard-hat"></i> Construction &amp; Infrastructure</div>
+                <div class="industry-item fade-up"><i class="fas fa-hand-holding-heart"></i> NGOs</div>
+                <div class="industry-item fade-up"><i class="fas fa-globe"></i> International Development Agencies</div>
+                <div class="industry-item fade-up"><i class="fas fa-graduation-cap"></i> Educational Institutions</div>
+                <div class="industry-item fade-up"><i class="fas fa-store"></i> Small &amp; Medium Enterprises</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ORGANIZATIONAL STRUCTURE ===== -->
+    <section class="org-structure">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Leadership</span>
+                <h2>Organizational Structure</h2>
+                <p>Our team is built on experience, dedication, and service excellence.</p>
+            </div>
+            <div class="org-tree">
+                <div class="org-node ceo fade-up"><h4><i class="fas fa-user-tie" style="color:var(--secondary);"></i> Managing Director</h4><p>Strategic leadership, governance, business development, and stakeholder engagement.</p></div>
+                <div class="org-children">
+                    <div class="org-node fade-up"><h4>Operations Manager</h4><p>Oversees daily travel operations, service delivery, supplier management, and quality assurance.</p></div>
+                    <div class="org-node fade-up"><h4>Finance &amp; Administration</h4><p>Financial management, procurement, compliance, and administrative support.</p></div>
+                    <div class="org-node fade-up"><h4>Corporate Travel Consultants</h4><p>Manage client accounts, travel planning, reservations, and itinerary management.</p></div>
+                    <div class="org-node fade-up"><h4>Customer Service Team</h4><p>Client support, booking assistance, and travel-related inquiries.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUALITY / SAFETY / CSR ===== -->
+    <section class="quality-section">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Excellence</span>
+                <h2>Quality, Safety &amp; Responsibility</h2>
+                <p>Our commitment to the highest standards.</p>
+            </div>
+            <div class="quality-grid">
+                <div class="quality-card fade-up"><i class="fas fa-check-double"></i><h4>Quality Assurance</h4><ul><li><i class="fas fa-chevron-right"></i> Continuous staff training &amp; development</li><li><i class="fas fa-chevron-right"></i> Quality management procedures</li><li><i class="fas fa-chevron-right"></i> Client feedback &amp; satisfaction monitoring</li><li><i class="fas fa-chevron-right"></i> Supplier performance evaluation</li><li><i class="fas fa-chevron-right"></i> Compliance with industry best practices</li><li><i class="fas fa-chevron-right"></i> Continuous service improvement initiatives</li></ul></div>
+                <div class="quality-card fade-up"><i class="fas fa-shield-virus"></i><h4>Health, Safety &amp; Risk</h4><ul><li><i class="fas fa-chevron-right"></i> Travel risk assessments</li><li><i class="fas fa-chevron-right"></i> Emergency response procedures</li><li><i class="fas fa-chevron-right"></i> Traveller support services</li><li><i class="fas fa-chevron-right"></i> Supplier safety evaluations</li><li><i class="fas fa-chevron-right"></i> Travel advisory monitoring</li></ul></div>
+                <div class="quality-card fade-up"><i class="fas fa-hands-helping"></i><h4>Corporate Social Responsibility</h4><ul><li><i class="fas fa-chevron-right"></i> Supporting local businesses &amp; tourism operators</li><li><i class="fas fa-chevron-right"></i> Creating employment opportunities</li><li><i class="fas fa-chevron-right"></i> Promoting sustainable tourism practices</li><li><i class="fas fa-chevron-right"></i> Encouraging cultural preservation &amp; awareness</li><li><i class="fas fa-chevron-right"></i> Contributing to community development initiatives</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STRATEGIC OBJECTIVES ===== -->
+    <section class="objectives">
+        <div class="container">
+            <div class="section-title fade-up">
+                <span class="tag">Looking Ahead</span>
+                <h2>Strategic Objectives</h2>
+                <p>Our roadmap for the next five years.</p>
+            </div>
+            <div class="objectives-grid">
+                <div class="objective-item fade-up"><span class="num">01</span><p>Expand corporate and government travel portfolios.</p></div>
+                <div class="objective-item fade-up"><span class="num">02</span><p>Strengthen digital travel management capabilities.</p></div>
+                <div class="objective-item fade-up"><span class="num">03</span><p>Increase partnerships with regional and international travel providers.</p></div>
+                <div class="objective-item fade-up"><span class="num">04</span><p>Promote Papua New Guinea as a preferred tourism destination.</p></div>
+                <div class="objective-item fade-up"><span class="num">05</span><p>Maintain industry-leading customer satisfaction levels.</p></div>
+                <div class="objective-item fade-up"><span class="num">06</span><p>Enhance operational efficiency and service delivery.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT / FOOTER – FORMPREE WITH AJAX ===== -->
+    <footer class="contact-footer" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <h3><i class="fas fa-compass" style="color:var(--secondary);"></i> Scenic Travel Agency</h3>
+                    <p>Your Journey, Our Commitment. We are dedicated to delivering professional travel solutions, exceptional customer service, and memorable travel experiences for every client, every journey, every time.</p>
+                    <div class="contact-details">
+                        <div class="item"><i class="fas fa-inbox"></i> Scenic Travel Agency, P.O. Box 1049, Vision City, Waigani, Port Moresby, National Capital District, Papua New Guinea</div>
+                        <div class="item"><i class="fas fa-map-marker-alt"></i> Sec.318, Lot.06, Wantok RadioLight Compound, Gerehu Stage. 2, Port Moresby, National Capital District, Papua New Guinea</div>
+                        <div class="item"><i class="fas fa-envelope"></i> info@scenictravelagency.com</div>
+                        <div class="item"><i class="fas fa-phone"></i> +675 71190470</div>
+                        <div class="item"><i class="fas fa-clock"></i> 24/7 Travel Support</div>
+                    </div>
+                    <div style="margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap;">
+                        <span style="background:rgba(255,255,255,0.06); padding:4px 16px; border-radius:50px; font-size:0.8rem;">100% PNG Owned</span>
+                        <span style="background:rgba(255,255,255,0.06); padding:4px 16px; border-radius:50px; font-size:0.8rem;">Travel Management</span>
+                        <span style="background:rgba(255,255,255,0.06); padding:4px 16px; border-radius:50px; font-size:0.8rem;">Tourism Services</span>
+                    </div>
+                </div>
+
+                <!-- CONTACT FORM – FORMPREE WITH AJAX (fixed action URL) -->
+                <div class="fade-up">
+                    <form action="https://formspree.io/f/xqpznapn" method="POST" class="contact-form" id="contactForm">
+                        <h4 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">Get in Touch</h4>
+                        <div class="row">
+                            <input type="text" name="name" placeholder="Your Name" required />
+                            <input type="email" name="email" placeholder="Email Address" required />
+                        </div>
+                        <input type="text" name="_subject" placeholder="Subject" style="margin-bottom:14px; width:100%;" />
+                        <textarea name="message" placeholder="Tell us about your travel needs…" required></textarea>
+                        <button type="submit" class="btn" id="formSubmitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <div id="formSuccess" class="form-success">✓ Your message has been sent successfully!</div>
+                        <div id="formError" class="form-error">✗ Something went wrong. Please try again.</div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Scenic Travel Agency (STA). All rights reserved.</span>
+                <div class="socials">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-top" id="backTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---- HAMBURGER ----
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // ---- HEADER SCROLL ----
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 60) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // ---- BACK TO TOP ----
+            const backTop = document.getElementById('backTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 400) {
+                    backTop.classList.add('visible');
+                } else {
+                    backTop.classList.remove('visible');
+                }
+            });
+
+            backTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ---- SCROLL ANIMATION ----
+            const fadeEls = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            fadeEls.forEach(el => observer.observe(el));
+
+            // ---- ACTIVE NAV LINK ----
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksArray = document.querySelectorAll('.nav-links a');
+
+            window.addEventListener('scroll', function() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinksArray.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // ---- FORMPREE AJAX FORM HANDLING ----
+            const form = document.getElementById('contactForm');
+            const successDiv = document.getElementById('formSuccess');
+            const errorDiv = document.getElementById('formError');
+            const submitBtn = document.getElementById('formSubmitBtn');
+
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const formData = new FormData(form);
+
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+
+                    successDiv.classList.remove('show');
+                    errorDiv.classList.remove('show');
+
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            successDiv.classList.add('show');
+                            form.reset();
+                        } else {
+                            let errorMsg = 'Something went wrong. Please try again.';
+                            try {
+                                const data = await response.json();
+                                if (data.error) errorMsg = data.error;
+                            } catch (e) {}
+                            errorDiv.textContent = '✗ ' + errorMsg;
+                            errorDiv.classList.add('show');
+                        }
+                    } catch (err) {
+                        errorDiv.textContent = '✗ Network error. Please check your connection.';
+                        errorDiv.classList.add('show');
+                    }
+
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    submitBtn.disabled = false;
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
