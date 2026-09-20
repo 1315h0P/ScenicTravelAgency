@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-PG" class="no-js">
 <head>
+    <script>document.documentElement.classList.remove('no-js');</script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Scenic Travel Agency (STA) – Papua New Guinea's Travel Partner</title>
     <meta name="description" content="Scenic Travel Agency is a proudly PNG-owned travel management company based in Port Moresby. We deliver professional travel solutions for corporate, government, and leisure travellers." />
+    <meta name="theme-color" content="#0a4b6e">
+    <link rel="canonical" href="https://scenictravelagency.com/">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Scenic Travel Agency – Papua New Guinea's Travel Partner">
+    <meta property="og:description" content="Proudly PNG-owned travel management in Port Moresby. Corporate, government, and leisure travel.">
+    <meta property="og:image" content="https://scenictravelagency.com/og-image.jpg">
+    <meta property="og:url" content="https://scenictravelagency.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scenic Travel Agency – Papua New Guinea's Travel Partner">
+    <meta name="twitter:description" content="Proudly PNG-owned travel management in Port Moresby.">
+    <meta name="twitter:image" content="https://scenictravelagency.com/og-image.jpg">
+
+    <link rel="icon" href="favicon.ico">
 
     <!-- Font Awesome (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
@@ -29,10 +46,8 @@
             --primary-dark: #06344e;
             --secondary: #c9a84c;
             --secondary-light: #e0c76e;
-            --accent: #f5f0e8;
             --gray-100: #f8f7f4;
             --gray-200: #eae8e3;
-            --gray-300: #d0cdc6;
             --gray-600: #6b6a66;
             --gray-800: #2e2d2a;
             --white: #ffffff;
@@ -65,10 +80,29 @@
             display: block;
         }
 
+        /* Anchor offset for fixed header */
+        section[id],
+        footer[id] {
+            scroll-margin-top: 96px;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+        }
+
+        /* Screen-reader-only utility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         /* ===== BUTTONS ===== */
@@ -119,6 +153,7 @@
             z-index: 1000;
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--gray-200);
             transition: var(--transition);
         }
@@ -280,6 +315,13 @@
             margin-bottom: 32px;
         }
 
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
         .hero-badges {
             display: flex;
             flex-wrap: wrap;
@@ -310,6 +352,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 200px;
         }
 
         .hero-image .logo-wrapper img {
@@ -317,8 +360,19 @@
             height: auto;
             width: clamp(180px, 40vw, 300px);
             object-fit: contain;
-            mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
+            mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
+        }
+
+        .logo-fallback {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--secondary);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .hero-image .card-icon {
@@ -595,6 +649,20 @@
         .service-card ul li i {
             font-size: 0.6rem;
             color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .service-card-wide {
+            grid-column: 1 / -1;
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .service-card-wide ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 24px;
         }
 
         /* ===== COMPETITIVE ADVANTAGE ===== */
@@ -653,6 +721,13 @@
             opacity: 0.8;
         }
 
+        .advantage-wide {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         /* ===== INDUSTRIES ===== */
         .industries {
             padding: clamp(60px, 10vh, 80px) 0;
@@ -680,6 +755,7 @@
             justify-content: center;
             gap: 10px;
             min-height: 60px;
+            border: 1px solid transparent;
         }
 
         .industry-item:hover {
@@ -813,6 +889,7 @@
         .quality-card ul li i {
             font-size: 0.6rem;
             color: var(--secondary);
+            flex-shrink: 0;
         }
 
         /* ===== STRATEGIC OBJECTIVES ===== */
@@ -908,13 +985,12 @@
             width: 100%;
             padding: 14px 18px;
             border-radius: 8px;
-            border: none;
+            border: 1px solid transparent;
             background: rgba(255, 255, 255, 0.08);
             color: var(--white);
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             transition: var(--transition);
-            border: 1px solid transparent;
         }
 
         .contact-form input::placeholder,
@@ -939,6 +1015,10 @@
         .contact-form textarea {
             resize: vertical;
             min-height: 100px;
+            margin-bottom: 14px;
+        }
+
+        .contact-form .subject {
             margin-bottom: 14px;
         }
 
@@ -1058,6 +1138,10 @@
                 margin-right: auto;
             }
 
+            .hero-cta {
+                justify-content: center;
+            }
+
             .hero-badges {
                 justify-content: center;
             }
@@ -1123,12 +1207,15 @@
                 gap: 20px;
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
                 transform: translateY(-120%);
-                transition: var(--transition);
+                visibility: hidden;
+                transition: transform var(--transition), visibility 0s linear 0.3s;
                 border-bottom: 1px solid var(--gray-200);
             }
 
             .nav-links.open {
                 transform: translateY(0);
+                visibility: visible;
+                transition: transform var(--transition), visibility 0s linear 0s;
             }
 
             .hamburger {
@@ -1143,8 +1230,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .service-card-wide ul {
+                grid-template-columns: 1fr;
+            }
+
             .advantage-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .advantage-wide {
+                max-width: 100%;
             }
 
             .industries-grid {
@@ -1183,11 +1278,6 @@
                 flex-direction: column;
                 text-align: center;
             }
-
-            .advantage-item:last-child {
-                grid-column: 1 / -1 !important;
-                max-width: 100% !important;
-            }
         }
 
         /* Extra Small Phones */
@@ -1199,7 +1289,7 @@
             .hero-content h1 {
                 font-size: clamp(1.6rem, 8vw, 2rem);
             }
-            
+
             .hero-content .btn {
                 width: 100%;
                 justify-content: center;
@@ -1233,7 +1323,7 @@
             .section-title {
                 margin-bottom: 30px;
             }
-            
+
             .section-title h2 {
                 font-size: 1.6rem;
             }
@@ -1245,7 +1335,7 @@
             .service-card {
                 padding: 20px 16px;
             }
-            
+
             .service-card ul li {
                 font-size: 0.8rem;
             }
@@ -1253,7 +1343,7 @@
             .org-node {
                 padding: 14px 16px;
             }
-            
+
             .org-node h4 {
                 font-size: 0.95rem;
             }
@@ -1269,7 +1359,7 @@
             .advantage-item {
                 padding: 20px 16px;
             }
-            
+
             .advantage-item i {
                 font-size: 2rem;
             }
@@ -1298,7 +1388,7 @@
             .hero-image .logo-wrapper img {
                 width: 140px;
             }
-            
+
             .hero-badges {
                 gap: 8px;
             }
@@ -1325,6 +1415,32 @@
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* No-JS guard: reveal all animated elements */
+        .no-js .fade-up {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ===== REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            .fade-up {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
 
         /* Back to top */
@@ -1366,8 +1482,8 @@
     <!-- ===== HEADER ===== -->
     <header class="header" id="header">
         <div class="container">
-            <a href="#" class="logo">
-                <i class="fas fa-compass"></i>
+            <a href="#home" class="logo" aria-label="Scenic Travel Agency home">
+                <i class="fas fa-compass" aria-hidden="true"></i>
                 Scenic<span>Travel</span>
             </a>
 
@@ -1380,7 +1496,10 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
 
-            <button class="hamburger" id="hamburger" aria-label="Menu">
+            <button class="hamburger" id="hamburger"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -1395,29 +1514,37 @@
                     We're Scenic Travel Agency — a proudly Papua New Guinean-owned team based in Port Moresby.
                     From corporate travel to weekend getaways, we handle the logistics so you can focus on what matters.
                 </p>
-                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; justify-content: center;">
+                <div class="hero-cta">
                     <a href="#services" class="btn btn-primary">
-                        <i class="fas fa-plane"></i> Explore Services
+                        <i class="fas fa-plane" aria-hidden="true"></i> Explore Services
                     </a>
                     <a href="#contact" class="btn btn-outline">
-                        <i class="fas fa-envelope"></i> Get in Touch
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Get in Touch
                     </a>
                 </div>
                 <div class="hero-badges">
-                    <span><i class="fas fa-check-circle" style="color:var(--secondary);"></i> 100% PNG Owned</span>
-                    <span><i class="fas fa-clock"></i> 24/7 Support</span>
-                    <span><i class="fas fa-star"></i> Service Excellence</span>
+                    <span><i class="fas fa-check-circle" style="color:var(--secondary);" aria-hidden="true"></i> 100% PNG Owned</span>
+                    <span><i class="fas fa-clock" aria-hidden="true"></i> 24/7 Support</span>
+                    <span><i class="fas fa-star" aria-hidden="true"></i> Service Excellence</span>
                 </div>
             </div>
 
             <div class="hero-image">
                 <div class="logo-wrapper">
-                    <img src="Logo.jpg" alt="Scenic Travel Agency Logo">
+                    <img src="Logo.jpg"
+                         alt="Scenic Travel Agency logo"
+                         width="300" height="300"
+                         fetchpriority="high"
+                         decoding="async"
+                         onerror="this.hidden=true;document.getElementById('logoFallback').hidden=false;">
+                    <div id="logoFallback" class="logo-fallback" hidden>
+                        <i class="fas fa-compass" aria-hidden="true"></i> Scenic Travel
+                    </div>
                 </div>
                 <div class="card-icon">
                     <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:0.9rem; justify-content:center;">
                         <span style="opacity:0.85; white-space:nowrap;">
-                            <i class="fas fa-map-pin" style="color:var(--secondary); margin-right:6px;"></i>
+                            <i class="fas fa-map-pin" style="color:var(--secondary); margin-right:6px;" aria-hidden="true"></i>
                             Port Moresby · Serving PNG and beyond
                         </span>
                         <span style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -1451,7 +1578,7 @@
                     </div>
                 </div>
                 <div class="about-image fade-up">
-                    <i class="fas fa-handshake"></i>
+                    <i class="fas fa-handshake" aria-hidden="true"></i>
                     <h4>Your Journey, Our Commitment</h4>
                     <p style="color:var(--gray-600); font-size:0.95rem; margin-top:8px;">We don't just book flights — we build trust, one trip at a time. Our local knowledge and global reach mean you're in good hands wherever you're headed.</p>
                 </div>
@@ -1463,7 +1590,7 @@
     <section class="message">
         <div class="container">
             <div class="message-card fade-up">
-                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="quote-icon"><i class="fas fa-quote-left" aria-hidden="true"></i></div>
                 <p>When we started STA, we wanted to build something different. A travel agency that doesn't just process bookings, but truly partners with its clients. Travel in Papua New Guinea comes with its own flavour — the remote airstrips, the weather that changes without warning, the need for someone who knows the lay of the land. We've lived it, and we've built our business around it.</p>
                 <p>Our team genuinely enjoys helping people get where they need to go, whether that's a government delegation heading to a conference, a family planning their first overseas holiday, or a business executive who needs to be in three different provinces in a single week. We take pride in getting the details right so our clients can focus on their work and their lives.</p>
                 <p>I invite you to reach out, ask questions, and give us the chance to show you what travel care really looks like.</p>
@@ -1482,23 +1609,23 @@
             </div>
             <div class="vm-grid">
                 <div class="vm-card fade-up">
-                    <div class="icon"><i class="fas fa-eye"></i></div>
+                    <div class="icon"><i class="fas fa-eye" aria-hidden="true"></i></div>
                     <h3>Our Vision</h3>
                     <p>To be Papua New Guinea's most trusted travel management company — known not just for efficiency, but for genuine care, local insight, and a relentless commitment to getting it right.</p>
                 </div>
                 <div class="vm-card fade-up">
-                    <div class="icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="icon"><i class="fas fa-bullseye" aria-hidden="true"></i></div>
                     <h3>Our Mission</h3>
                     <p>To deliver travel solutions that are as reliable as they are personalised. We aim to make every booking feel effortless, every journey safe, and every client feel like they're our only client.</p>
                 </div>
             </div>
             <div class="values-grid">
-                <div class="value-item fade-up"><i class="fas fa-shield-alt"></i><h4>Integrity</h4><p>We do what we say we'll do. No fine print, no surprises.</p></div>
-                <div class="value-item fade-up"><i class="fas fa-star"></i><h4>Excellence</h4><p>Good isn't good enough. We push for great, every time.</p></div>
-                <div class="value-item fade-up"><i class="fas fa-users"></i><h4>Customer Focus</h4><p>You're not a transaction — you're the reason we exist.</p></div>
-                <div class="value-item fade-up"><i class="fas fa-clock"></i><h4>Reliability</h4><p>When we say we'll handle it, we handle it.</p></div>
-                <div class="value-item fade-up"><i class="fas fa-rocket"></i><h4>Innovation</h4><p>We embrace smart tools and better ways of working.</p></div>
-                <div class="value-item fade-up"><i class="fas fa-handshake"></i><h4>Partnership</h4><p>Your success is our success. We grow together.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-shield-alt" aria-hidden="true"></i><h4>Integrity</h4><p>We do what we say we'll do. No fine print, no surprises.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-star" aria-hidden="true"></i><h4>Excellence</h4><p>Good isn't good enough. We push for great, every time.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-users" aria-hidden="true"></i><h4>Customer Focus</h4><p>You're not a transaction — you're the reason we exist.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-clock" aria-hidden="true"></i><h4>Reliability</h4><p>When we say we'll handle it, we handle it.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-rocket" aria-hidden="true"></i><h4>Innovation</h4><p>We embrace smart tools and better ways of working.</p></div>
+                <div class="value-item fade-up"><i class="fas fa-handshake" aria-hidden="true"></i><h4>Partnership</h4><p>Your success is our success. We grow together.</p></div>
             </div>
         </div>
     </section>
@@ -1512,23 +1639,74 @@
                 <p>From complex corporate itineraries to simple weekend escapes — we've got you covered.</p>
             </div>
             <div class="services-grid">
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-briefcase"></i></div><h4>Corporate Travel Management</h4><ul><li><i class="fas fa-chevron-right"></i> Domestic &amp; international air bookings</li><li><i class="fas fa-chevron-right"></i> Executive &amp; VIP travel arrangements</li><li><i class="fas fa-chevron-right"></i> Travel policy compliance &amp; reporting</li><li><i class="fas fa-chevron-right"></i> Corporate account management</li><li><i class="fas fa-chevron-right"></i> Group travel coordination</li></ul></div>
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-landmark"></i></div><h4>Government &amp; Institutional Travel</h4><ul><li><i class="fas fa-chevron-right"></i> Official travel arrangements</li><li><i class="fas fa-chevron-right"></i> Conference &amp; workshop logistics</li><li><i class="fas fa-chevron-right"></i> Delegation travel coordination</li><li><i class="fas fa-chevron-right"></i> Procurement-compliant services</li></ul></div>
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-umbrella-beach"></i></div><h4>Leisure &amp; Holiday Travel</h4><ul><li><i class="fas fa-chevron-right"></i> Custom holiday packages</li><li><i class="fas fa-chevron-right"></i> Family vacations</li><li><i class="fas fa-chevron-right"></i> Honeymoon &amp; romantic getaways</li><li><i class="fas fa-chevron-right"></i> Cruise &amp; resort bookings</li></ul></div>
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-hotel"></i></div><h4>Accommodation Management</h4><ul><li><i class="fas fa-chevron-right"></i> Hotel reservations</li><li><i class="fas fa-chevron-right"></i> Long-term accommodation arrangements</li><li><i class="fas fa-chevron-right"></i> Serviced apartments &amp; retreats</li></ul></div>
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-car"></i></div><h4>Transport &amp; Logistics</h4><ul><li><i class="fas fa-chevron-right"></i> Airport transfers</li><li><i class="fas fa-chevron-right"></i> Vehicle hire &amp; chauffeur services</li><li><i class="fas fa-chevron-right"></i> Group transportation solutions</li></ul></div>
-                <div class="service-card fade-up"><div class="icon"><i class="fas fa-headset"></i></div><h4>Travel Support Services</h4><ul><li><i class="fas fa-chevron-right"></i> Travel insurance arrangements</li><li><i class="fas fa-chevron-right"></i> Visa assistance &amp; advisory</li><li><i class="fas fa-chevron-right"></i> Emergency travel assistance</li><li><i class="fas fa-chevron-right"></i> Meet-&amp;-greet services</li></ul></div>
-            </div>
-            <div style="margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
-                <div class="service-card fade-up" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width:100%;">
-                    <div class="icon"><i class="fas fa-tree"></i></div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
+                    <h4>Corporate Travel Management</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Domestic &amp; international air bookings</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Executive &amp; VIP travel arrangements</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Travel policy compliance &amp; reporting</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Corporate account management</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Group travel coordination</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-landmark" aria-hidden="true"></i></div>
+                    <h4>Government &amp; Institutional Travel</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Official travel arrangements</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Conference &amp; workshop logistics</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Delegation travel coordination</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Procurement-compliant services</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-umbrella-beach" aria-hidden="true"></i></div>
+                    <h4>Leisure &amp; Holiday Travel</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Custom holiday packages</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Family vacations</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Honeymoon &amp; romantic getaways</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Cruise &amp; resort bookings</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-hotel" aria-hidden="true"></i></div>
+                    <h4>Accommodation Management</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Hotel reservations</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Long-term accommodation arrangements</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Serviced apartments &amp; retreats</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-car" aria-hidden="true"></i></div>
+                    <h4>Transport &amp; Logistics</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Airport transfers</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Vehicle hire &amp; chauffeur services</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Group transportation solutions</li>
+                    </ul>
+                </div>
+                <div class="service-card fade-up">
+                    <div class="icon"><i class="fas fa-headset" aria-hidden="true"></i></div>
+                    <h4>Travel Support Services</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Travel insurance arrangements</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Visa assistance &amp; advisory</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Emergency travel assistance</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Meet-&amp;-greet services</li>
+                    </ul>
+                </div>
+                <div class="service-card service-card-wide fade-up">
+                    <div class="icon"><i class="fas fa-tree" aria-hidden="true"></i></div>
                     <h4>Tourism &amp; Destination Management</h4>
-                    <ul style="display:grid; grid-template-columns:1fr 1fr; gap:4px 24px;">
-                        <li><i class="fas fa-chevron-right"></i> Cultural tours</li>
-                        <li><i class="fas fa-chevron-right"></i> Eco-tourism packages</li>
-                        <li><i class="fas fa-chevron-right"></i> Adventure travel experiences</li>
-                        <li><i class="fas fa-chevron-right"></i> Corporate retreats</li>
-                        <li><i class="fas fa-chevron-right" style="grid-column:1/2;"></i> Incentive travel programs</li>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Cultural tours</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Eco-tourism packages</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Adventure travel experiences</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Corporate retreats</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Incentive travel programs</li>
                     </ul>
                 </div>
             </div>
@@ -1544,13 +1722,13 @@
                 <p>We don't just book travel — we bring local knowledge, personal care, and a can-do attitude to every trip.</p>
             </div>
             <div class="advantage-grid">
-                <div class="advantage-item fade-up"><i class="fas fa-map-marked-alt"></i><h4>Local Expertise</h4><p>We know PNG's travel landscape inside out — from the best routes to the hidden challenges.</p></div>
-                <div class="advantage-item fade-up"><i class="fas fa-user-tie"></i><h4>Personalised Service</h4><p>You'll work with a dedicated consultant who knows your preferences and your history.</p></div>
-                <div class="advantage-item fade-up"><i class="fas fa-handshake"></i><h4>Strong Industry Partnerships</h4><p>We've built real relationships with airlines, hotels, and transport providers across the region.</p></div>
-                <div class="advantage-item fade-up"><i class="fas fa-coins"></i><h4>Cost-Effective Solutions</h4><p>We work hard to find the best value without compromising on quality or safety.</p></div>
-                <div class="advantage-item fade-up"><i class="fas fa-users-cog"></i><h4>Professional Team</h4><p>Our people are experienced, approachable, and genuinely passionate about travel.</p></div>
-                <div class="advantage-item fade-up"><i class="fas fa-bolt"></i><h4>Rapid Response</h4><p>Need a change of plan? We react quickly and calmly — because travel is unpredictable.</p></div>
-                <div class="advantage-item fade-up" style="grid-column: 1 / -1; max-width: 400px; margin: 0 auto; width:100%;"><i class="fas fa-phone-alt"></i><h4>24/7 Travel Support</h4><p>Emergencies don't wait for business hours, and neither do we. We're here when you need us.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-map-marked-alt" aria-hidden="true"></i><h4>Local Expertise</h4><p>We know PNG's travel landscape inside out — from the best routes to the hidden challenges.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-user-tie" aria-hidden="true"></i><h4>Personalised Service</h4><p>You'll work with a dedicated consultant who knows your preferences and your history.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-handshake" aria-hidden="true"></i><h4>Strong Industry Partnerships</h4><p>We've built real relationships with airlines, hotels, and transport providers across the region.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-coins" aria-hidden="true"></i><h4>Cost-Effective Solutions</h4><p>We work hard to find the best value without compromising on quality or safety.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-users-cog" aria-hidden="true"></i><h4>Professional Team</h4><p>Our people are experienced, approachable, and genuinely passionate about travel.</p></div>
+                <div class="advantage-item fade-up"><i class="fas fa-bolt" aria-hidden="true"></i><h4>Rapid Response</h4><p>Need a change of plan? We react quickly and calmly — because travel is unpredictable.</p></div>
+                <div class="advantage-item advantage-wide fade-up"><i class="fas fa-phone-alt" aria-hidden="true"></i><h4>24/7 Travel Support</h4><p>Emergencies don't wait for business hours, and neither do we. We're here when you need us.</p></div>
             </div>
         </div>
     </section>
@@ -1564,18 +1742,18 @@
                 <p>Our clients come from every corner of PNG's economy — and we're proud to serve them all.</p>
             </div>
             <div class="industries-grid">
-                <div class="industry-item fade-up"><i class="fas fa-flag"></i> National Government</div>
-                <div class="industry-item fade-up"><i class="fas fa-building"></i> Provincial Governments</div>
-                <div class="industry-item fade-up"><i class="fas fa-industry"></i> State-Owned Enterprises</div>
-                <div class="industry-item fade-up"><i class="fas fa-hard-hat"></i> Mining &amp; Resources</div>
-                <div class="industry-item fade-up"><i class="fas fa-oil-can"></i> Oil &amp; Gas</div>
-                <div class="industry-item fade-up"><i class="fas fa-university"></i> Banking &amp; Finance</div>
-                <div class="industry-item fade-up"><i class="fas fa-wifi"></i> Telecommunications</div>
-                <div class="industry-item fade-up"><i class="fas fa-hard-hat"></i> Construction &amp; Infrastructure</div>
-                <div class="industry-item fade-up"><i class="fas fa-hand-holding-heart"></i> NGOs</div>
-                <div class="industry-item fade-up"><i class="fas fa-globe"></i> International Development</div>
-                <div class="industry-item fade-up"><i class="fas fa-graduation-cap"></i> Educational Institutions</div>
-                <div class="industry-item fade-up"><i class="fas fa-store"></i> SMEs</div>
+                <div class="industry-item fade-up"><i class="fas fa-flag" aria-hidden="true"></i> National Government</div>
+                <div class="industry-item fade-up"><i class="fas fa-building" aria-hidden="true"></i> Provincial Governments</div>
+                <div class="industry-item fade-up"><i class="fas fa-industry" aria-hidden="true"></i> State-Owned Enterprises</div>
+                <div class="industry-item fade-up"><i class="fas fa-hard-hat" aria-hidden="true"></i> Mining &amp; Resources</div>
+                <div class="industry-item fade-up"><i class="fas fa-oil-can" aria-hidden="true"></i> Oil &amp; Gas</div>
+                <div class="industry-item fade-up"><i class="fas fa-university" aria-hidden="true"></i> Banking &amp; Finance</div>
+                <div class="industry-item fade-up"><i class="fas fa-wifi" aria-hidden="true"></i> Telecommunications</div>
+                <div class="industry-item fade-up"><i class="fas fa-helmet-safety" aria-hidden="true"></i> Construction &amp; Infrastructure</div>
+                <div class="industry-item fade-up"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> NGOs</div>
+                <div class="industry-item fade-up"><i class="fas fa-globe" aria-hidden="true"></i> International Development</div>
+                <div class="industry-item fade-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Educational Institutions</div>
+                <div class="industry-item fade-up"><i class="fas fa-store" aria-hidden="true"></i> SMEs</div>
             </div>
         </div>
     </section>
@@ -1589,7 +1767,10 @@
                 <p>A small, dedicated team with big hearts and deep experience.</p>
             </div>
             <div class="org-tree">
-                <div class="org-node ceo fade-up"><h4><i class="fas fa-user-tie" style="color:var(--secondary);"></i> Managing Director</h4><p>Strategic leadership, governance, business development, and stakeholder engagement.</p></div>
+                <div class="org-node ceo fade-up">
+                    <h4><i class="fas fa-user-tie" style="color:var(--secondary);" aria-hidden="true"></i> Managing Director</h4>
+                    <p>Strategic leadership, governance, business development, and stakeholder engagement.</p>
+                </div>
                 <div class="org-children">
                     <div class="org-node fade-up"><h4>Operations Manager</h4><p>Oversees daily travel operations, service delivery, supplier management, and quality assurance.</p></div>
                     <div class="org-node fade-up"><h4>Finance &amp; Administration</h4><p>Financial management, procurement, compliance, and administrative support.</p></div>
@@ -1609,9 +1790,39 @@
                 <p>We take our role seriously — because travel should always be safe, reliable, and thoughtful.</p>
             </div>
             <div class="quality-grid">
-                <div class="quality-card fade-up"><i class="fas fa-check-double"></i><h4>Quality Assurance</h4><ul><li><i class="fas fa-chevron-right"></i> Continuous staff training &amp; development</li><li><i class="fas fa-chevron-right"></i> Quality management procedures</li><li><i class="fas fa-chevron-right"></i> Client feedback &amp; satisfaction monitoring</li><li><i class="fas fa-chevron-right"></i> Supplier performance evaluation</li><li><i class="fas fa-chevron-right"></i> Continuous service improvement</li></ul></div>
-                <div class="quality-card fade-up"><i class="fas fa-shield-virus"></i><h4>Health, Safety &amp; Risk</h4><ul><li><i class="fas fa-chevron-right"></i> Travel risk assessments</li><li><i class="fas fa-chevron-right"></i> Emergency response procedures</li><li><i class="fas fa-chevron-right"></i> Traveller support services</li><li><i class="fas fa-chevron-right"></i> Supplier safety evaluations</li><li><i class="fas fa-chevron-right"></i> Travel advisory monitoring</li></ul></div>
-                <div class="quality-card fade-up"><i class="fas fa-hands-helping"></i><h4>Corporate Social Responsibility</h4><ul><li><i class="fas fa-chevron-right"></i> Supporting local businesses &amp; tourism operators</li><li><i class="fas fa-chevron-right"></i> Creating employment opportunities</li><li><i class="fas fa-chevron-right"></i> Promoting sustainable tourism practices</li><li><i class="fas fa-chevron-right"></i> Encouraging cultural preservation</li><li><i class="fas fa-chevron-right"></i> Contributing to community development</li></ul></div>
+                <div class="quality-card fade-up">
+                    <i class="fas fa-check-double" aria-hidden="true"></i>
+                    <h4>Quality Assurance</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Continuous staff training &amp; development</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Quality management procedures</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Client feedback &amp; satisfaction monitoring</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Supplier performance evaluation</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Continuous service improvement</li>
+                    </ul>
+                </div>
+                <div class="quality-card fade-up">
+                    <i class="fas fa-shield-virus" aria-hidden="true"></i>
+                    <h4>Health, Safety &amp; Risk</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Travel risk assessments</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Emergency response procedures</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Traveller support services</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Supplier safety evaluations</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Travel advisory monitoring</li>
+                    </ul>
+                </div>
+                <div class="quality-card fade-up">
+                    <i class="fas fa-hands-helping" aria-hidden="true"></i>
+                    <h4>Corporate Social Responsibility</h4>
+                    <ul>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Supporting local businesses &amp; tourism operators</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Creating employment opportunities</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Promoting sustainable tourism practices</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Encouraging cultural preservation</li>
+                        <li><i class="fas fa-chevron-right" aria-hidden="true"></i> Contributing to community development</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -1640,14 +1851,14 @@
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info fade-up">
-                    <h3><i class="fas fa-compass" style="color:var(--secondary);"></i> Scenic Travel Agency</h3>
+                    <h3><i class="fas fa-compass" style="color:var(--secondary);" aria-hidden="true"></i> Scenic Travel Agency</h3>
                     <p>Your journey matters to us. Whether you're travelling for work, for government, or for the sheer joy of discovery — we're here to make it happen, smoothly and with a smile.</p>
                     <div class="contact-details">
-                        <div class="item"><i class="fas fa-inbox"></i> P.O. Box 1049, Vision City, Waigani, Port Moresby, NCD</div>
-                        <div class="item"><i class="fas fa-map-marker-alt"></i> Sec.318, Lot.06, Wantok RadioLight Compound, Gerehu Stage 2, Port Moresby</div>
-                        <div class="item"><i class="fas fa-envelope"></i> info@scenictravelagency.com</div>
-                        <div class="item"><i class="fas fa-phone"></i> +675 71190470</div>
-                        <div class="item"><i class="fas fa-clock"></i> 24/7 Travel Support</div>
+                        <div class="item"><i class="fas fa-inbox" aria-hidden="true"></i> P.O. Box 1049, Vision City, Waigani, Port Moresby, NCD</div>
+                        <div class="item"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Sec.318, Lot.06, Wantok RadioLight Compound, Gerehu Stage 2, Port Moresby</div>
+                        <div class="item"><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:info@scenictravelagency.com">info@scenictravelagency.com</a></div>
+                        <div class="item"><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+67571190470">+675 71190470</a></div>
+                        <div class="item"><i class="fas fa-clock" aria-hidden="true"></i> 24/7 Travel Support</div>
                     </div>
                     <div style="margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap;">
                         <span style="background:rgba(255,255,255,0.06); padding:4px 16px; border-radius:50px; font-size:0.8rem;">100% PNG Owned</span>
@@ -1657,31 +1868,52 @@
                 </div>
 
                 <div class="fade-up">
+                    <!-- NOTE: replace Formspree endpoint with your own before going live -->
                     <form action="https://formspree.io/f/xqpznapn" method="POST" class="contact-form" id="contactForm">
                         <h4 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">Let's Talk Travel</h4>
                         <p style="opacity:0.7; margin-bottom:20px; font-size:0.95rem;">Drop us a line — we'd love to hear about your next trip.</p>
+
                         <div class="row">
-                            <input type="text" name="name" placeholder="Your name" required />
-                            <input type="email" name="email" placeholder="Email address" required />
+                            <div>
+                                <label class="sr-only" for="name">Your name</label>
+                                <input id="name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
+                            </div>
+                            <div>
+                                <label class="sr-only" for="email">Email address</label>
+                                <input id="email" type="email" name="email" placeholder="Email address" autocomplete="email" required />
+                            </div>
                         </div>
-                        <input type="text" name="_subject" placeholder="Subject" style="margin-bottom:14px; width:100%;" />
-                        <textarea name="message" placeholder="Tell us about your travel needs…" required></textarea>
+
+                        <div class="subject">
+                            <label class="sr-only" for="subject">Subject</label>
+                            <input id="subject" type="text" name="_subject" placeholder="Subject" autocomplete="off" />
+                        </div>
+
+                        <label class="sr-only" for="message">Your message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your travel needs…" required></textarea>
+
                         <button type="submit" class="btn" id="formSubmitBtn">
-                            <i class="fas fa-paper-plane"></i> Send Message
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
                         </button>
-                        <div id="formSuccess" class="form-success">✓ Thanks! We'll be in touch shortly.</div>
-                        <div id="formError" class="form-error">✗ Something went wrong. Please try again or give us a call.</div>
+
+                        <div id="formSuccess" class="form-success" role="status" aria-live="polite">
+                            ✓ Thanks! We'll be in touch shortly.
+                        </div>
+                        <div id="formError" class="form-error" role="alert">
+                            ✗ Something went wrong. Please try again or give us a call.
+                        </div>
                     </form>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <span>&copy; 2026 Scenic Travel Agency (STA). All rights reserved.</span>
+                <!-- NOTE: replace with real social URLs before launch -->
                 <div class="socials">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -1689,8 +1921,36 @@
 
     <!-- ===== BACK TO TOP ===== -->
     <button class="back-top" id="backTop" aria-label="Back to top">
-        <i class="fas fa-chevron-up"></i>
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </button>
+
+    <!-- ===== STRUCTURED DATA ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Scenic Travel Agency",
+      "description": "PNG-owned travel management company based in Port Moresby serving corporate, government, and leisure travellers.",
+      "url": "https://scenictravelagency.com/",
+      "email": "info@scenictravelagency.com",
+      "telephone": "+67571190470",
+      "address": {
+        "@type": "PostalAddress",
+        "postOfficeBoxNumber": "1049",
+        "streetAddress": "Sec.318, Lot.06, Wantok RadioLight Compound, Gerehu Stage 2",
+        "addressLocality": "Port Moresby",
+        "addressRegion": "NCD",
+        "addressCountry": "PG"
+      },
+      "areaServed": "Papua New Guinea",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    }
+    </script>
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
@@ -1702,52 +1962,62 @@
             const navLinks = document.getElementById('navLinks');
 
             hamburger.addEventListener('click', function() {
-                this.classList.toggle('active');
+                const isOpen = this.classList.toggle('active');
                 navLinks.classList.toggle('open');
+                this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             });
 
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
                     navLinks.classList.remove('open');
                 });
             });
 
             // ---- HEADER SCROLL ----
             const header = document.getElementById('header');
-            window.addEventListener('scroll', function() {
+            const backTop = document.getElementById('backTop');
+
+            function onScroll() {
                 if (window.pageYOffset > 60) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
                 }
-            });
 
-            // ---- BACK TO TOP ----
-            const backTop = document.getElementById('backTop');
-            window.addEventListener('scroll', function() {
                 if (window.pageYOffset > 400) {
                     backTop.classList.add('visible');
                 } else {
                     backTop.classList.remove('visible');
                 }
-            });
+            }
 
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // ---- BACK TO TOP ----
             backTop.addEventListener('click', function() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
             // ---- SCROLL ANIMATION ----
             const fadeEls = document.querySelectorAll('.fade-up');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-            fadeEls.forEach(el => observer.observe(el));
+                fadeEls.forEach(el => observer.observe(el));
+            } else {
+                // Fallback: reveal all
+                fadeEls.forEach(el => el.classList.add('visible'));
+            }
 
             // ---- ACTIVE NAV LINK ----
             const sections = document.querySelectorAll('section[id]');
@@ -1768,13 +2038,14 @@
                         link.classList.add('active');
                     }
                 });
-            });
+            }, { passive: true });
 
-            // ---- FORMPREE AJAX FORM HANDLING ----
+            // ---- FORMSPREE AJAX FORM HANDLING ----
             const form = document.getElementById('contactForm');
             const successDiv = document.getElementById('formSuccess');
             const errorDiv = document.getElementById('formError');
             const submitBtn = document.getElementById('formSubmitBtn');
+            const submitBtnDefault = '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message';
 
             if (form) {
                 form.addEventListener('submit', async function(e) {
@@ -1782,7 +2053,7 @@
 
                     const formData = new FormData(form);
 
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Sending...';
                     submitBtn.disabled = true;
 
                     successDiv.classList.remove('show');
@@ -1805,7 +2076,7 @@
                             try {
                                 const data = await response.json();
                                 if (data.error) errorMsg = data.error;
-                            } catch (e) {}
+                            } catch (e) { /* ignore parse error */ }
                             errorDiv.textContent = '✗ ' + errorMsg;
                             errorDiv.classList.add('show');
                         }
@@ -1814,7 +2085,7 @@
                         errorDiv.classList.add('show');
                     }
 
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    submitBtn.innerHTML = submitBtnDefault;
                     submitBtn.disabled = false;
                 });
             }
